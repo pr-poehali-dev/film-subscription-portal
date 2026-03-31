@@ -34,7 +34,7 @@ export const MOVIES: Movie[] = [
     rating: 9.3,
     userRating: null,
     description: "История о неосуждённом банкире Энди Дюфрейне, который выживает в тюрьме Шоушенк, сохраняя надежду и достоинство.",
-    poster: "https://cdn.poehali.dev/projects/eb62e844-3f2c-47c0-ab6b-f7fd98962f40/files/64c72d32-4634-456e-833e-728a4d5eff9f.jpg",
+    poster: "https://cdn.poehali.dev/projects/eb62e844-3f2c-47c0-ab6b-f7fd98962f40/files/076f402b-fd51-483d-99b3-268fe4fbab99.jpg",
     duration: "2ч 22м",
     director: "Фрэнк Дарабонт",
     country: "США",
