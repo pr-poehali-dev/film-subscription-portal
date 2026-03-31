@@ -2,14 +2,16 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import MovieCard from "@/components/MovieCard";
+import VideoPlayer from "@/components/VideoPlayer";
 import Icon from "@/components/ui/icon";
-import { MOVIES, getTopMovies } from "@/data/movies";
+import { MOVIES, Movie } from "@/data/movies";
 
 const BG_HERO = "https://cdn.poehali.dev/projects/eb62e844-3f2c-47c0-ab6b-f7fd98962f40/files/64c72d32-4634-456e-833e-728a4d5eff9f.jpg";
 
 export default function Home() {
   const [movies, setMovies] = useState(MOVIES);
   const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const topMovies = [...movies].sort((a, b) => b.rating - a.rating).slice(0, 3);
 
@@ -27,6 +29,12 @@ export default function Home() {
 
   return (
     <Layout>
+      <VideoPlayer
+        movie={selectedMovie!}
+        isOpen={!!selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+        isPremium={false}
+      />
       <section className="relative min-h-[90vh] flex items-center overflow-hidden grain-overlay">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -113,6 +121,7 @@ export default function Home() {
                 rank={i + 1}
                 onRate={handleRate}
                 onFavorite={handleFavorite}
+                onWatch={setSelectedMovie}
                 isFavorite={favorites.includes(movie.id)}
               />
             </div>

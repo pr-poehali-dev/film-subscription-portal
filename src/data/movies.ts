@@ -10,6 +10,7 @@ export interface Movie {
   duration: string;
   director: string;
   country: string;
+  videoUrl?: string;
 }
 
 export const MOVIES: Movie[] = [

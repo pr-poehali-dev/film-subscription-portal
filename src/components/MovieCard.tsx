@@ -8,10 +8,11 @@ interface MovieCardProps {
   rank?: number;
   onRate?: (id: number, rating: number) => void;
   onFavorite?: (id: number) => void;
+  onWatch?: (movie: Movie) => void;
   isFavorite?: boolean;
 }
 
-export default function MovieCard({ movie, rank, onRate, onFavorite, isFavorite }: MovieCardProps) {
+export default function MovieCard({ movie, rank, onRate, onFavorite, onWatch, isFavorite }: MovieCardProps) {
   const [hoverRating, setHoverRating] = useState(0);
   const [localRating, setLocalRating] = useState(movie.userRating || 0);
 
@@ -59,6 +60,15 @@ export default function MovieCard({ movie, rank, onRate, onFavorite, isFavorite 
             size={14}
             className={isFavorite ? "text-red-400 fill-red-400" : "text-white/70"}
           />
+        </button>
+
+        <button
+          onClick={() => onWatch?.(movie)}
+          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200"
+        >
+          <div className="w-14 h-14 rounded-full bg-black/70 backdrop-blur-sm border border-gold/40 flex items-center justify-center hover:bg-gold/20 hover:border-gold transition-all duration-200">
+            <Icon name="Play" size={22} className="text-white ml-1" />
+          </div>
         </button>
       </div>
 

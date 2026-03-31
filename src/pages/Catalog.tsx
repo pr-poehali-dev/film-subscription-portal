@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import MovieCard from "@/components/MovieCard";
+import VideoPlayer from "@/components/VideoPlayer";
 import Icon from "@/components/ui/icon";
-import { MOVIES } from "@/data/movies";
+import { MOVIES, Movie } from "@/data/movies";
 
 const GENRES = ["Все", "Драма", "Криминал", "Боевик", "Фантастика", "История", "Биография", "Комедия", "Приключения"];
 const SORT_OPTIONS = [
@@ -14,6 +15,7 @@ const SORT_OPTIONS = [
 export default function Catalog() {
   const [movies, setMovies] = useState(MOVIES);
   const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
   const [activeGenre, setActiveGenre] = useState("Все");
   const [sortBy, setSortBy] = useState("rating");
   const [search, setSearch] = useState("");
@@ -41,6 +43,12 @@ export default function Catalog() {
 
   return (
     <Layout>
+      <VideoPlayer
+        movie={selectedMovie!}
+        isOpen={!!selectedMovie}
+        onClose={() => setSelectedMovie(null)}
+        isPremium={false}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <div className="mb-10">
           <div className="flex items-center gap-2 mb-3">
@@ -98,6 +106,7 @@ export default function Catalog() {
                 movie={movie}
                 onRate={handleRate}
                 onFavorite={handleFavorite}
+                onWatch={setSelectedMovie}
                 isFavorite={favorites.includes(movie.id)}
               />
             ))}
